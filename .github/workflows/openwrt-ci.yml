@@ -8,8 +8,8 @@
 name: OpenWrt-CI
 
 on:
-  schedule:
-    - cron: 0 20 * * *
+  # schedule:
+  #  - cron: 0 20 * * *
   push:
     branches:
       - master
@@ -53,10 +53,10 @@ jobs:
 
           df -h
           
-      - name: Clone packages
-        run: |
-          cd package
-          git clone https://github.com/liuran001/openwrt-packages
+      # - name: Clone packages
+      #  run: |
+      #    cd package
+      #    git clone https://github.com/liuran001/openwrt-packages
 
       - name: Update feeds
         run: |
@@ -113,44 +113,44 @@ jobs:
           EOF
 
           # LuCI插件选择:
-          cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-app-aria2=y
-          CONFIG_PACKAGE_luci-app-docker=y
-          CONFIG_PACKAGE_luci-app-kodexplorer=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
-          CONFIG_PACKAGE_luci-app-uhttpd=y
-          CONFIG_PACKAGE_luci-app-serverchan=y
-          CONFIG_PACKAGE_luci-app-v2ray-server=y
-          CONFIG_PACKAGE_luci-app-koolproxyR=y
-          CONFIG_PACKAGE_luci-app-xlnetacc=y
-          CONFIG_PACKAGE_luci-app-sqm=y
-          CONFIG_PACKAGE_luci-app-softethervpn=y
-          CONFIG_PACKAGE_luci-app-baidupcs-web=y
-          CONFIG_PACKAGE_luci-app-frpc=y
-          CONFIG_PACKAGE_luci-app-minidlna=y
-          CONFIG_PACKAGE_luci-app-smartinfo=y
-          CONFIG_PACKAGE_luci-app-ttyd=y
-          CONFIG_PACKAGE_luci-app-lxc=y
-          CONFIG_PACKAGE_luci-app-statistics=y
-          CONFIG_PACKAGE_luci-app-zerotier=y
-          CONFIG_PACKAGE_luci-app-aliddns=y
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
-          CONFIG_PACKAGE_UnblockNeteaseMusic=y
-          CONFIG_PACKAGE_trojan=y
-          CONFIG_PACKAGE_openwrt-adguardhome-master=y
-          EOF
+          # cat >> .config <<EOF
+          # CONFIG_PACKAGE_luci-app-aria2=y
+          # CONFIG_PACKAGE_luci-app-docker=y
+          # CONFIG_PACKAGE_luci-app-kodexplorer=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
+          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
+          # CONFIG_PACKAGE_luci-app-uhttpd=y
+          # CONFIG_PACKAGE_luci-app-serverchan=y
+          # CONFIG_PACKAGE_luci-app-v2ray-server=y
+          # CONFIG_PACKAGE_luci-app-koolproxyR=y
+          # CONFIG_PACKAGE_luci-app-xlnetacc=y
+          # CONFIG_PACKAGE_luci-app-sqm=y
+          # CONFIG_PACKAGE_luci-app-softethervpn=y
+          # CONFIG_PACKAGE_luci-app-baidupcs-web=y
+          # CONFIG_PACKAGE_luci-app-frpc=y
+          # CONFIG_PACKAGE_luci-app-minidlna=y
+          # CONFIG_PACKAGE_luci-app-smartinfo=y
+          # CONFIG_PACKAGE_luci-app-ttyd=y
+          # CONFIG_PACKAGE_luci-app-lxc=y
+          # CONFIG_PACKAGE_luci-app-statistics=y
+          # CONFIG_PACKAGE_luci-app-zerotier=y
+          # CONFIG_PACKAGE_luci-app-aliddns=y
+          # CONFIG_PACKAGE_luci-app-qbittorrent=y
+          # CONFIG_PACKAGE_UnblockNeteaseMusic=y
+          # CONFIG_PACKAGE_trojan=y
+          # CONFIG_PACKAGE_openwrt-adguardhome-master=y
+          # EOF
 
           # LuCI主题:
-          cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-theme-argon=y
-          CONFIG_PACKAGE_luci-theme-rosy=y
-          CONFIG_PACKAGE_luci-theme-atmaterial=y
-          CONFIG_PACKAGE_luci-app-adguardhome-master=y
-          EOF
+          # cat >> .config <<EOF
+          # CONFIG_PACKAGE_luci-theme-argon=y
+          # CONFIG_PACKAGE_luci-theme-rosy=y
+          # CONFIG_PACKAGE_luci-theme-atmaterial=y
+          # CONFIG_PACKAGE_luci-app-adguardhome-master=y
+          # EOF
 
           # 常用软件包:
           cat >> .config <<EOF
@@ -158,14 +158,6 @@ jobs:
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_wget=y
           CONFIG_PACKAGE_diffutils=y
-          EOF
-
-          # 其他需要安装的软件包:
-          cat >> .config <<EOF
-          CONFIG_PACKAGE_iptables-mod-nat-extra=y
-          CONFIG_PACKAGE_drill=y
-          CONFIG_PACKAGE_luci-i18n-uhttpd-zh-cn=y
-          CONFIG_PACKAGE_luci-ssl-openssl=y
           EOF
 
           sed -i 's/^[ \t]*//g' ./.config
